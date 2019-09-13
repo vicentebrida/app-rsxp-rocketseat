@@ -1,5 +1,3 @@
-'use strict'
-
 const { randomBytes } = require('crypto');
 const { promisify } = require('util');
 
@@ -25,13 +23,17 @@ class ForgotPasswordController {
 
     const resetPasswordUrl = `${Env.get('FRONT_URL')}/reset?token=${token}`;
 
-    await Mail.send('emails.forgotpassword', { name: user.name, resetPasswordUrl }, (message) => {
-      message
-        .to(user.email)
-        .from('oi@outlook.com')
-        .subject('RS/XP - Recuperação de senha')
-    })
+    await Mail.send(
+      'emails.forgotpassword',
+      { name: user.name, resetPasswordUrl },
+      message => {
+        message
+          .to(user.email)
+          .from('oi@outlook.com')
+          .subject('RS/XP - Recuperação de senha');
+      }
+    );
   }
 }
 
-module.exports = ForgotPasswordController
+module.exports = ForgotPasswordController;
