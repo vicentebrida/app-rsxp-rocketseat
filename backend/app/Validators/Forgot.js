@@ -3,7 +3,7 @@
 class Forgot {
   get rules () {
     return {
-      emai: 'email|required',
+      email: 'email|required',
     }
   }
 }
